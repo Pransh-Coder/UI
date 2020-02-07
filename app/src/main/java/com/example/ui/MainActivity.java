@@ -2,21 +2,26 @@ package com.example.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity {
+    final String  TAG="Main Activity monitoring";
     TextView textView;
     MyEditText editText;
-
+     float maxLines=11;// experimented these are max chars in a line
+    private ArrayList<Integer> positions= new ArrayList<>();        // would contain the positions at which lines break and start
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +29,23 @@ public class MainActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.txtview);
         editText = findViewById(R.id.editText);
-
-        setupAutoresize();
+        positions.add(0);
+        setupAutoresizeDim();
+        DisplayScreen();
     }
 
-    private void setupAutoresize() {
+    @SuppressLint("LongLogTag")
+    private void DisplayScreen() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+//        Toast(TAG," width is "+width+" and height is "+height);
+        Toast.makeText(this, "width is "+width+" and height is "+height, Toast.LENGTH_SHORT).show();
+    }
 
+    private void setupAutoresizeDim() {
         textView.setText(" ", TextView.BufferType.EDITABLE);
-
         float txtVsize =  textView.getTextSize();
         Log.d("textsize in TextV", String.valueOf(txtVsize));
 
@@ -49,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.d("func call","onTextChanged");
+//                Log.d(TAG,"current textSize is "+editText.getTextSize()/getResources().getDisplayMetrics().scaledDensity);
+//                maxLines=((6)*(editText.getTextSize()/getResources().getDisplayMetrics().scaledDensity))/80;
+//                Log.d(TAG," max chars at one line are "+maxLines);
+                float ratio =charSequence.length()/maxLines;//editText.getSelectionStart()/maxLines;
                 String text;
                 if (charSequence.length() == 0) {
                     textView.setText(" ");
@@ -62,21 +80,25 @@ public class MainActivity extends AppCompatActivity {
                     }
                     textView.setText(charSequence);
                 }
+                if(ratio>=1) ratio=1;
+//                changed here
+                resizeTheEditText(editText,ratio);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Log.d("func call","afterTextChanged");
-                if(editable.charAt(editable.length()-1)=='\n'){
-                    editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
-                    Log.d("func call inside "," text set ");
-//                    Toast.makeText(MainActivity.this, "new line and size is "+editText.getTextSize(), Toast.LENGTH_SHORT).show();
-                }
-//                editText.setTextSize(textView.getTextSize());
+
             }
+
+
         });
     }
-
+    @SuppressLint("LongLogTag")
+    private void resizeTheEditText(MyEditText editText, float ratio) {
+        float newSize=64- (80*ratio) + 32;
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,newSize*2);//
+        Log.d(TAG,"setting the text size as "+newSize+" received ratio as "+ratio );
+    }
     private float autosizeText(float size) {
         Resources var10001 = this.getResources();
         //Intrinsics.checkExpressionValueIsNotNull(var10001, "resources");
