@@ -6,44 +6,6 @@
     android:background="@drawable/custom_background"
     android:layout_height="match_parent">
 
-   <!-- <com.linsh.nopaddingtextview.NoPaddingTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30px"
-        android:background="#6000"
-        android:text="Hello World!"
-        android:textSize="100px" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/txtview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:focusable="false"-->
-<!--        app:autoSizeTextType="uniform"-->
-<!--        app:autoSizeMinTextSize="12sp"-->
-<!--        app:autoSizeMaxTextSize="80sp"-->
-<!--        android:text="text"-->
-<!--        app:autoSizeStepGranularity="2sp"-->
-<!--        android:includeFontPadding="false"-->
-<!--        android:lineSpacingExtra="0dp"-->
-<!--        android:layout_margin="0dp"-->
-<!--        android:visibility="invisible"-->
-
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
-
-
-
-    <!--<EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:textSize="80dp"
-        android:padding="0dp"
-        android:hint="text"
-        android:layout_margin="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>-->
 
     <com.example.ui.MyEditText
         android:id="@+id/editText"
@@ -61,35 +23,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <!--<com.agilie.RotatableAutofitEditText
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:autofit="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/autoResizeEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corners_white_transparent_50"
-        android:gravity="center"
-        android:hint="add text"
-        android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/darker_gray"
-        autofit:clipBounds="true"
-        autofit:maxTextSize="@dimen/autoresize_max_text_size"
-        autofit:minTextSize="@dimen/autoresize_min_text_size"
-        autofit:minWidth="@dimen/autoresize_min_width"
-        autofit:movable="true"
-        autofit:resizable="true"
-        autofit:rotatable="true" />-->
- <!--   <com.victorminerva.widget.edittext.AutofitEdittext
-        android:id="@+id/autoedttxt_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:hint="HINT"
-        android:maxLength="80"
-        android:maxLines="2"
-        android:textColor="#000000"
-        android:textSize="64sp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

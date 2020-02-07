@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        textView = findViewById(R.id.txtview);
+//      textView = findViewById(R.id.txtview);
         editText = findViewById(R.id.editText);
         positions.add(0);
         setupAutoresizeDim();
@@ -40,19 +40,14 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
-//        Toast(TAG," width is "+width+" and height is "+height);
         Toast.makeText(this, "width is "+width+" and height is "+height, Toast.LENGTH_SHORT).show();
     }
 
     private void setupAutoresizeDim() {
-//        textView.setText(" ", TextView.BufferType.EDITABLE);
-//        float txtVsize =  textView.getTextSize();
-//        Log.d("textsize in TextV", String.valueOf(txtVsize));
 
-        float edtsize=editText.getTextSize();
+        final float edtsize=editText.getTextSize();
         Log.d("editsize in editT", String.valueOf(edtsize));
 
-//        edtsize=txtVsize;
         Log.d("changed size editT", String.valueOf(edtsize));
 
         editText.setTextSize(/*textView.getTextSize()*/edtsize);
@@ -75,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
 //                    textView.setText(" ");
                 } else {
                     if(charSequence.charAt(charSequence.length()-1)=='\n'){
-                        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,9);
+                        CharSequence s = editText.getText().subSequence(0,charSequence.length()-1);
+                        Log.d("value of char",s.toString().charAt(0)+"");
+                        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
                         Toast.makeText(MainActivity.this, "new line and size is "+editText.getTextSize(), Toast.LENGTH_SHORT).show();
                     }
-//                    textView.setText(charSequence);
                 }
                 if(ratio>=1) ratio=1;
 //                changed here
@@ -89,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-
-
         });
     }
     @SuppressLint("LongLogTag")
@@ -99,11 +93,5 @@ public class MainActivity extends AppCompatActivity {
         double newSize=48- (64*ratio) + 32;         // 48 and 32 used to make textsize 80sp when value of (64*ratio)=0
         editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,(float) newSize*2);//
         Log.d(TAG,"setting the text size as "+newSize+" received ratio as "+ratio );
-    }
-
-    private float autosizeText(float size) {
-        Resources var10001 = this.getResources();
-        //Intrinsics.checkExpressionValueIsNotNull(var10001, "resources");
-        return size / (var10001.getDisplayMetrics().density + (float) 2);
     }
 }
