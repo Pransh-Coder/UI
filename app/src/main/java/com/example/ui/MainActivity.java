@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     final String  TAG="Main Activity monitoring";
 //    TextView textView;
     MyEditText editText;
-     float maxLines=13;// experimented these are max chars in a line
+     float maxLines=11;// experimented these are max chars in a line
     private ArrayList<Integer> positions= new ArrayList<>();        // would contain the positions at which lines break and start
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("LongLogTag")
     private void resizeTheEditText(MyEditText editText, double ratio) {
         ratio=ratio/1.1;
-        double newSize=64- (80*ratio) + 32;
+        double newSize=48- (64*ratio) + 32;
         editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,(float) newSize*2);//
         Log.d(TAG,"setting the text size as "+newSize+" received ratio as "+ratio );
     }
+
     private float autosizeText(float size) {
         Resources var10001 = this.getResources();
         //Intrinsics.checkExpressionValueIsNotNull(var10001, "resources");
