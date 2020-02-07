@@ -17,6 +17,7 @@
         android:id="@+id/txtview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:focusable="false"
         app:autoSizeTextType="uniform"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeMaxTextSize="80sp"
@@ -25,6 +26,8 @@
         android:includeFontPadding="false"
         android:lineSpacingExtra="0dp"
         android:layout_margin="0dp"
+        android:visibility="invisible"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

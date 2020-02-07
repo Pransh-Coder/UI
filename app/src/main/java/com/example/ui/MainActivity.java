@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 if (charSequence.length() == 0) {
                     textView.setText(" ");
                 } else {
+                    if(charSequence.charAt(charSequence.length()-1)=='\n'){
+                        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,9);
+                        Toast.makeText(MainActivity.this, "new line and size is "+editText.getTextSize(), Toast.LENGTH_SHORT).show();
+                    }
                     textView.setText(charSequence);
                 }
             }
@@ -61,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 Log.d("func call","afterTextChanged");
-                editText.setTextSize(textView.getTextSize());
+                if(editable.charAt(editable.length()-1)=='\n'){
+                    editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,40);
+                    Log.d("func call inside "," text set ");
+//                    Toast.makeText(MainActivity.this, "new line and size is "+editText.getTextSize(), Toast.LENGTH_SHORT).show();
+                }
+//                editText.setTextSize(textView.getTextSize());
             }
         });
     }
