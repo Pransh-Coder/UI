@@ -18,16 +18,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     final String  TAG="Main Activity monitoring";
-    TextView textView;
+//    TextView textView;
     MyEditText editText;
-     float maxLines=11;// experimented these are max chars in a line
+     float maxLines=13;// experimented these are max chars in a line
     private ArrayList<Integer> positions= new ArrayList<>();        // would contain the positions at which lines break and start
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.txtview);
+//        textView = findViewById(R.id.txtview);
         editText = findViewById(R.id.editText);
         positions.add(0);
         setupAutoresizeDim();
@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupAutoresizeDim() {
-        textView.setText(" ", TextView.BufferType.EDITABLE);
-        float txtVsize =  textView.getTextSize();
-        Log.d("textsize in TextV", String.valueOf(txtVsize));
+//        textView.setText(" ", TextView.BufferType.EDITABLE);
+//        float txtVsize =  textView.getTextSize();
+//        Log.d("textsize in TextV", String.valueOf(txtVsize));
 
         float edtsize=editText.getTextSize();
         Log.d("editsize in editT", String.valueOf(edtsize));
 
-        edtsize=txtVsize;
+//        edtsize=txtVsize;
         Log.d("changed size editT", String.valueOf(edtsize));
 
         editText.setTextSize(/*textView.getTextSize()*/edtsize);
@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
                 float ratio =charSequence.length()/maxLines;//editText.getSelectionStart()/maxLines;
                 String text;
                 if (charSequence.length() == 0) {
-                    textView.setText(" ");
+//                    textView.setText(" ");
                 } else {
                     if(charSequence.charAt(charSequence.length()-1)=='\n'){
                         editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,9);
                         Toast.makeText(MainActivity.this, "new line and size is "+editText.getTextSize(), Toast.LENGTH_SHORT).show();
                     }
-                    textView.setText(charSequence);
+//                    textView.setText(charSequence);
                 }
                 if(ratio>=1) ratio=1;
 //                changed here
@@ -94,9 +94,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     @SuppressLint("LongLogTag")
-    private void resizeTheEditText(MyEditText editText, float ratio) {
-        float newSize=64- (80*ratio) + 32;
-        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,newSize*2);//
+    private void resizeTheEditText(MyEditText editText, double ratio) {
+        ratio=ratio/1.1;
+        double newSize=64- (80*ratio) + 32;
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,(float) newSize*2);//
         Log.d(TAG,"setting the text size as "+newSize+" received ratio as "+ratio );
     }
     private float autosizeText(float size) {
